@@ -110,8 +110,8 @@ public class EmailService {
 
           helper.setText(body, isHtml);
           helper.setTo(to);
-          helper.setSubject(subject);
-          helper.setFrom(from, "ffmpeg email");
+          helper.setSubject(String.format("[ffmpeg server] %s", subject));
+          helper.setFrom(from, "Leonardpark Server");
 
           mailSender.send(mimeMessage);
         } catch (MessagingException | UnsupportedEncodingException e) {

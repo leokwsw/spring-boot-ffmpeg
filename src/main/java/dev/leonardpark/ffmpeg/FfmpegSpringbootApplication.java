@@ -8,12 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.transaction.annotation.Transactional;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableCaching
+@EnableSwagger2
 @Transactional
 @IntegrationComponentScan
 @EnableIntegration
@@ -31,19 +35,19 @@ public class FfmpegSpringbootApplication extends SpringBootServletInitializer {
     EmailService emailService
   ) {
     return args -> {
-      emailService.serverStart();
+      // emailService.serverStart();
       log.info("RunTime : CommandLineRunner run Finished");
     };
   }
 
-  @Bean
-  CommandLineRunner onExit(
-    EmailService emailService
-  ) {
-    return args -> {
-      emailService.serverStop();
-      log.info("RunTime : CommandLineRunner onExit Finished");
-    };
-  }
+//  @Bean
+//  CommandLineRunner onExit(
+//    EmailService emailService
+//  ) {
+//    return args -> {
+//      emailService.serverStop();
+//      log.info("RunTime : CommandLineRunner onExit Finished");
+//    };
+//  }
 
 }

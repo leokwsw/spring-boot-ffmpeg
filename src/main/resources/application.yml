@@ -5,13 +5,29 @@ server:
 #  key-store-password: Leonardpark2023
 
 spring:
+ devtools:
+  add-properties: true
  data:
   mongodb:
    host: localhost
    port: 27017
    database: ffmpeg
+  redis:
+   database: 0
+   host: localhost
+   port: 6379
+   password:
+   jedis:
+    pool:
+     max-active: 8
+     max-wait: -1ms
+     max-idle: 8
+     min-idle: 0
  main:
   allow-bean-definition-overriding: true
+ mvc:
+  pathmatch:
+   matching-strategy: ant_path_matcher
  servlet:
   multipart:
    max-file-size: -1
