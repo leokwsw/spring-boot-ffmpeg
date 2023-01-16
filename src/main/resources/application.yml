@@ -1,0 +1,42 @@
+server:
+ port: 8000
+# ssl:
+#  key-store: classpath:keystore/key.jks
+#  key-store-password: Leonardpark2023
+
+spring:
+ data:
+  mongodb:
+   host: localhost
+   port: 27017
+   database: ffmpeg
+ main:
+  allow-bean-definition-overriding: true
+ servlet:
+  multipart:
+   max-file-size: -1
+   max-request-size: -1
+
+auditLog:
+ enable: true
+
+ffmpeg:
+ dir: /Users/leowu/Desktop/ffmpeg-springboot-data
+
+email:
+ debug: false
+ host: smtp.gmail.com
+ port: 587
+ sender:
+  email: leonardpark.server@gmail.com
+  password: irynxjmnumiodhor
+  from: ffmpeg@leonardpark.dev
+ smtp:
+  auth: true
+  starttls:
+   enable: true
+ transport:
+  protocols: smtp
+
+
+
