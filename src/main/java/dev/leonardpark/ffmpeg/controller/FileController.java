@@ -31,10 +31,12 @@ public class FileController {
   @GetMapping("list")
   // Request : size, limit, search by file name, filter by extension
   // Response : file list with file id, file name, extension, file size, preview url
-  public ResponseEntity<CommonResponseModel> getFileList(
+  public ResponseEntity<List<FileModel>> getFileList(
     GetFileListQueryModel queryModel
   ) {
-    return CommonResponseModel.successResponseWithMessage(true, "file list");
+    List<FileModel> responseModel = fileService.getList(queryModel);
+    return ResponseEntity.ok(responseModel);
+    //return CommonResponseModel.successResponseWithMessage(true, "file list");
   }
 
   @ApiOperation(value = "upload file")

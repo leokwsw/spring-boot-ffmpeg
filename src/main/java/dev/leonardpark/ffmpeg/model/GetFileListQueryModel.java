@@ -11,12 +11,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetFileListQueryModel {
-  @ApiModelProperty(value = "size")
-  private Integer size = 20;
+  @ApiModelProperty(value = "skip")
+  private Integer skip = 0;
   @ApiModelProperty(value = "limit")
   private Integer limit = 10;
   @ApiModelProperty(value = "keyword")
   private String keyword;
   @ApiModelProperty(value = "extension")
   private String extension;
+  @ApiModelProperty(value = "get all")
+  private boolean isGetAll = false;
 }

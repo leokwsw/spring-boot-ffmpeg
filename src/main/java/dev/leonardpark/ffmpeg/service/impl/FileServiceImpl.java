@@ -3,18 +3,24 @@ package dev.leonardpark.ffmpeg.service.impl;
 import dev.leonardpark.ffmpeg.entity.FileEntity;
 import dev.leonardpark.ffmpeg.exception.FileNotFountException;
 import dev.leonardpark.ffmpeg.model.FileModel;
+import dev.leonardpark.ffmpeg.model.GetFileListQueryModel;
 import dev.leonardpark.ffmpeg.respository.FileRepository;
 import dev.leonardpark.ffmpeg.service.FileService;
 import dev.leonardpark.ffmpeg.utils.FileUtil;
 import dev.leonardpark.ffmpeg.utils.MD5Hash;
+import dev.leonardpark.ffmpeg.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +32,32 @@ public class FileServiceImpl implements FileService {
   @Value("${ffmpeg.dir:''}")
   private File dir;
 
+  @Autowired
+  private MongoTemplate mongoTemplate;
+
+  @Override
+  public List<FileModel> getList(GetFileListQueryModel queryModel) {
+    Query query = new Query();
+
+    if (!queryModel.isGetAll()) {
+      query.skip(queryModel.getSkip());
+      query.limit(queryModel.getLimit());
+    }
+
+    if (queryModel.getKeyword() != null && queryModel.getKeyword().trim().length() > 0) {
+      Criteria fileNameCriteria = Criteria.where("fileName").regex(StringUtils.escapeRegExp(queryModel.getKeyword()));
+      query.addCriteria(fileNameCriteria);
+    }
+
+    if (queryModel.getExtension() != null && queryModel.getExtension().trim().length() > 0) {
+      Criteria extensionCriteria = Criteria.where("extension").regex(StringUtils.escapeRegExp(queryModel.getExtension()));
+      query.addCriteria(extensionCriteria);
+    }
+
+    List<FileEntity> files = mongoTemplate.find(query, FileEntity.class);
+
+    return files.stream().map(FileModel::convertFromFileEntity).toList();
+  }
 
   @Override
   public FileModel uploadFile(MultipartFile file) throws IOException {
