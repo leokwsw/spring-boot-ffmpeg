@@ -4,12 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.async.TimeoutCallableProcessingInterceptor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
   @Override
-  protected void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+  public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
     configurer.setDefaultTimeout(300000);
     configurer.registerCallableInterceptors(timeoutInterceptor());
   }

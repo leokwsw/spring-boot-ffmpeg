@@ -1,5 +1,6 @@
 server:
  port: 8000
+ forward-headers-strategy: framework
 # ssl:
 #  key-store: classpath:keystore/key.jks
 #  key-store-password: Leonardpark2023

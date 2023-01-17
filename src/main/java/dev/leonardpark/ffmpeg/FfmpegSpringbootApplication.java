@@ -4,6 +4,7 @@ import dev.leonardpark.ffmpeg.utils.EmailService;
 import dev.leonardpark.ffmpeg.utils.Timer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,10 +25,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class FfmpegSpringbootApplication extends SpringBootServletInitializer {
   private static final Logger log = LoggerFactory.getLogger(FfmpegSpringbootApplication.class);
   static Timer timer = new Timer();
+  static int serverPort;
+
+  @Value("${server.port}")
+  void setServerPort(int port) {
+    FfmpegSpringbootApplication.serverPort = port;
+  }
+
+  static String getBaseUrl() {
+    return String.format("http://localhost:%s", serverPort);
+  }
 
   public static void main(String[] args) {
     SpringApplication.run(FfmpegSpringbootApplication.class, args);
     log.info("RunTime : Server Started ; used : {}", timer.timePast());
+    log.info("RunTime : Swagger-UI Url : {}/swagger-ui/index.html", getBaseUrl());
   }
 
   @Bean
@@ -39,15 +51,4 @@ public class FfmpegSpringbootApplication extends SpringBootServletInitializer {
       log.info("RunTime : CommandLineRunner run Finished");
     };
   }
-
-//  @Bean
-//  CommandLineRunner onExit(
-//    EmailService emailService
-//  ) {
-//    return args -> {
-//      emailService.serverStop();
-//      log.info("RunTime : CommandLineRunner onExit Finished");
-//    };
-//  }
-
 }
