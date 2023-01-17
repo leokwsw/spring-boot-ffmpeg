@@ -1,6 +1,7 @@
 package dev.leonardpark.ffmpeg.controller;
 
 import dev.leonardpark.ffmpeg.model.CommonResponseModel;
+import dev.leonardpark.ffmpeg.model.FileModel;
 import dev.leonardpark.ffmpeg.model.GetFileListQueryModel;
 import dev.leonardpark.ffmpeg.service.FileService;
 import dev.leonardpark.ffmpeg.utils.ResponseUtils;
@@ -40,10 +41,9 @@ public class FileController {
   @PostMapping("upload")
   // Request : file
   // Response : file id, file name, extension, file size, preview url
-  public ResponseEntity<CommonResponseModel> postFile(
-    @RequestPart MultipartFile file
-  ) {
-    return CommonResponseModel.successResponseWithMessage(true, "upload file");
+  public ResponseEntity<FileModel> postFile(@RequestPart MultipartFile file) throws IOException {
+    FileModel responseModel = fileService.uploadFile(file);
+    return ResponseEntity.ok(responseModel);
   }
 
   @ApiOperation(value = "delete files")
@@ -61,8 +61,9 @@ public class FileController {
   public ResponseEntity<Resource> getFile(
     @PathVariable("fileId") String fileId
   ) throws IOException {
-    String dummyFile = "/Users/leowu/Desktop/sampleVideo/Dr.STONE-新石紀-第二季/第06話-越獄.mp4";
-    File file = new File(dummyFile);
+    String fullPath = fileService.getFileFullPath(fileId);
+//    String dummyFile = "/Users/leowu/Desktop/sampleVideo/Dr.STONE-新石紀-第二季/第06話-越獄.mp4";
+    File file = new File(fullPath);
 
     return ResponseUtils.fileResponse(file);
   }

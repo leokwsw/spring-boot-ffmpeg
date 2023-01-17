@@ -1,5 +1,6 @@
 package dev.leonardpark.ffmpeg.model;
 
+import dev.leonardpark.ffmpeg.entity.FileEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,14 @@ public class FileModel {
   private String name;
   private Long size;
   private String extension;
+
+  public static FileModel convertFromFileEntity(FileEntity file) {
+    return new FileModel(
+      file.getId(),
+      String.format("/api/file/%s", file.getId()),
+      file.getFileName(),
+      file.getFileSize(),
+      file.getExtension()
+    );
+  }
 }

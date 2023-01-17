@@ -10,4 +10,9 @@ public class FileUtil {
     Tika tika = new Tika();
     return tika.detect(path);
   }
+
+  public static String getPathExt(String filePath) {
+    String[] splinted = filePath.split("\\.");
+    return splinted[splinted.length - 1];
+  }
 }

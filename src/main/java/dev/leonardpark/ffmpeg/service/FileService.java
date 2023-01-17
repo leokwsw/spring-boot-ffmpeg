@@ -7,4 +7,5 @@ import java.io.IOException;
 
 public interface FileService {
   FileModel uploadFile(MultipartFile file) throws IOException;
+  String getFileFullPath(String fileId);
 }

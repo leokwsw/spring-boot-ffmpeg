@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class File extends Base {
+public class FileEntity extends Base {
   private String fileName;
   private String fullPath;
   private Long fileSize;
