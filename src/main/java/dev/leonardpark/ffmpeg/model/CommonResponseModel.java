@@ -15,7 +15,14 @@ public class CommonResponseModel {
   @ApiModelProperty(value = "success value")
   private Boolean success;
 
+  @ApiModelProperty(value = "message")
+  private String message;
+
   public static ResponseEntity<CommonResponseModel> successResponse(boolean success) {
-    return ResponseEntity.ok(new CommonResponseModel(success));
+    return ResponseEntity.ok(new CommonResponseModel(success, ""));
+  }
+
+  public static ResponseEntity<CommonResponseModel> successResponseWithMessage(boolean success, String message){
+    return ResponseEntity.ok(new CommonResponseModel(success, message));
   }
 }

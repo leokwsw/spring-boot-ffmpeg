@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMappi
 import springfox.documentation.PathProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.spring.web.plugins.WebFluxRequestHandlerProvider;
@@ -41,7 +42,7 @@ public class Config {
         }
       })
       .select()
-//      .apis(RequestHandlerSelectors.basePackage("dev.leonardpark.ffmpeg.controller"))
+      .apis(RequestHandlerSelectors.basePackage("dev.leonardpark.ffmpeg.controller"))
       .paths(PathSelectors.any())
       .build()
       .useDefaultResponseMessages(false);
