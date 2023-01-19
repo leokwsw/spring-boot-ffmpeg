@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "Video")
+@Api(tags = "ffMpeg")
 @RestController
-@RequestMapping("/api/video")
+@RequestMapping("/api/ffMpeg")
 @RequiredArgsConstructor
-public class VideoController {
+public class ffMpegController {
   @ApiOperation(value = "test")
   @RequestMapping("test")
   public ResponseEntity<CommonResponseModel> test() {
