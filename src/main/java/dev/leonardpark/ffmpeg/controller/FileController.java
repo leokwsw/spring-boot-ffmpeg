@@ -1,7 +1,7 @@
 package dev.leonardpark.ffmpeg.controller;
 
 import dev.leonardpark.ffmpeg.model.CommonResponseModel;
-import dev.leonardpark.ffmpeg.model.FileModel;
+import dev.leonardpark.ffmpeg.dto.FileModel;
 import dev.leonardpark.ffmpeg.model.GetFileListQueryModel;
 import dev.leonardpark.ffmpeg.service.FileService;
 import dev.leonardpark.ffmpeg.utils.ResponseUtils;

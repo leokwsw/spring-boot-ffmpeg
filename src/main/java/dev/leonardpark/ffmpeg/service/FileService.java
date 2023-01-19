@@ -1,6 +1,6 @@
 package dev.leonardpark.ffmpeg.service;
 
-import dev.leonardpark.ffmpeg.model.FileModel;
+import dev.leonardpark.ffmpeg.dto.FileModel;
 import dev.leonardpark.ffmpeg.model.GetFileListQueryModel;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -2,7 +2,7 @@ package dev.leonardpark.ffmpeg.service.impl;
 
 import dev.leonardpark.ffmpeg.entity.FileEntity;
 import dev.leonardpark.ffmpeg.exception.FileNotFountException;
-import dev.leonardpark.ffmpeg.model.FileModel;
+import dev.leonardpark.ffmpeg.dto.FileModel;
 import dev.leonardpark.ffmpeg.model.GetFileListQueryModel;
 import dev.leonardpark.ffmpeg.respository.FileRepository;
 import dev.leonardpark.ffmpeg.service.FileService;
@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -80,8 +81,8 @@ public class FileServiceImpl implements FileService {
 
     uploadFile.setFileName(fileName);
     uploadFile.setFullPath(filePath);
-    uploadFile.setFileSize(file.getSize());
-    uploadFile.setExtension(FileUtil.getPathExt(filePath));
+    uploadFile.setFileSize(dest.length());
+    uploadFile.setExtension(FileUtil.getPathExt(filePath).toLowerCase(Locale.ROOT));
     uploadFile.setMd5(MD5Hash.getMD5Hash(dest));
 
     uploadFile = fileRepository.save(uploadFile);
