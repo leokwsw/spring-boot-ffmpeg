@@ -46,8 +46,8 @@ public class FFmpegUtils {
   /**
    * 在指定的目錄下生成key_info, key文件，返回key_info文件
    *
-   * @param folder
-   * @throws IOException
+   * @param folder folder path
+   * @throws IOException IO Exception
    */
   private static Path genKeyInfo(String folder) throws IOException {
     // AES 密鑰

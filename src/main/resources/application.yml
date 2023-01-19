@@ -24,7 +24,11 @@ spring:
    host: localhost
    port: 27017
    database: ffmpeg
-
+ web:
+  resources:
+   static-locations:
+    - "classpath:/static/"
+    - "file:${ffmpeg.dir}"
  main:
   allow-bean-definition-overriding: true
  mvc:
